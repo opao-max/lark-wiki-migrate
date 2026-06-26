@@ -1,0 +1,9 @@
+﻿.workdir/
+migration-state*.json
+*.json.tmp
+.DS_Store
+__pycache__/
+*.pyc
+*.log
+.idea/
+.vscode/
