@@ -1,0 +1,106 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 700">
+  <defs>
+    <linearGradient id="step-bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#f8fafc"/>
+      <stop offset="100%" stop-color="#f1f5f9"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="700" rx="12" fill="url(#step-bg)"/>
+  <text x="600" y="40" text-anchor="middle" font-size="22" font-weight="bold" fill="#1e293b">Block API 路径 — migrate_docx() 8 步流程</text>
+
+  <!-- Step 1 -->
+  <rect x="40" y="70" width="260" height="70" rx="10" fill="#6366f1" opacity="0.9"/>
+  <text x="50" y="94" font-size="11" fill="rgba(255,255,255,0.7)">步骤 1</text>
+  <text x="170" y="96" text-anchor="middle" font-size="14" font-weight="bold" fill="white">read_docx_blocks()</text>
+  <text x="170" y="118" text-anchor="middle" font-size="11" fill="rgba(255,255,255,0.8)">分页读取源文档所有 blocks</text>
+  <text x="170" y="132" text-anchor="middle" font-size="10" fill="rgba(255,255,255,0.6)">📁 block_api.py</text>
+
+  <!-- Arrow 1→2 -->
+  <polyline points="300,105 340,105" fill="none" stroke="#94a3b8" stroke-width="2"/>
+  <polygon points="340,105 334,100 334,110" fill="#94a3b8"/>
+
+  <!-- Step 2 -->
+  <rect x="345" y="70" width="220" height="70" rx="10" fill="#f59e0b" opacity="0.9"/>
+  <text x="355" y="94" font-size="11" fill="rgba(255,255,255,0.7)">步骤 2</text>
+  <text x="455" y="96" text-anchor="middle" font-size="14" font-weight="bold" fill="white">检测图片</text>
+  <text x="455" y="118" text-anchor="middle" font-size="11" fill="rgba(255,255,255,0.8)">有图片 → Export/Import</text>
+  <text x="455" y="132" text-anchor="middle" font-size="10" fill="rgba(255,255,255,0.6)">bt=27 检测</text>
+
+  <!-- Arrow 2→3 -->
+  <polyline points="565,105 605,105" fill="none" stroke="#94a3b8" stroke-width="2"/>
+  <polygon points="605,105 599,100 599,110" fill="#94a3b8"/>
+
+  <!-- Step 3 -->
+  <rect x="610" y="70" width="240" height="70" rx="10" fill="#3b82f6" opacity="0.9"/>
+  <text x="620" y="94" font-size="11" fill="rgba(255,255,255,0.7)">步骤 3</text>
+  <text x="730" y="96" text-anchor="middle" font-size="14" font-weight="bold" fill="white">创建目标空白 docx</text>
+  <text x="730" y="118" text-anchor="middle" font-size="11" fill="rgba(255,255,255,0.8)">POST /docx/v1/documents</text>
+  <text x="730" y="132" text-anchor="middle" font-size="10" fill="rgba(255,255,255,0.6)">目标组织</text>
+
+  <!-- Arrow 3→4 -->
+  <polyline points="850,105 890,105" fill="none" stroke="#94a3b8" stroke-width="2"/>
+  <polygon points="890,105 884,100 884,110" fill="#94a3b8"/>
+
+  <!-- Step 4 -->
+  <rect x="895" y="70" width="270" height="70" rx="10" fill="#10b981" opacity="0.9"/>
+  <text x="905" y="94" font-size="11" fill="rgba(255,255,255,0.7)">步骤 4</text>
+  <text x="1030" y="96" text-anchor="middle" font-size="14" font-weight="bold" fill="white">迁移媒体资源</text>
+  <text x="1030" y="118" text-anchor="middle" font-size="11" fill="rgba(255,255,255,0.8)">返回 {block_id: MediaResult}</text>
+  <text x="1030" y="132" text-anchor="middle" font-size="10" fill="rgba(255,255,255,0.6)">📁 media.py</text>
+
+  <!-- Step 4 sub-items -->
+  <rect x="895" y="155" width="270" height="110" rx="8" fill="#10b981" opacity="0.15" stroke="#10b981" stroke-width="1"/>
+  <text x="910" y="175" font-size="11" fill="#10b981">▸ process_images() → 图片下载上传</text>
+  <text x="910" y="195" font-size="11" fill="#10b981">▸ process_embedded_files() → 文件</text>
+  <text x="910" y="215" font-size="11" fill="#10b981">▸ process_embedded_sheets() → 表格</text>
+  <text x="910" y="235" font-size="11" fill="#10b981">▸ process_boards() → 画板缩略图</text>
+
+  <!-- Arrow down to step 5 -->
+  <polyline points="1030,265 1030,295 600,295 600,325" fill="none" stroke="#94a3b8" stroke-width="2"/>
+  <polygon points="600,325 595,319 605,319" fill="#94a3b8"/>
+
+  <!-- Step 5 -->
+  <rect x="40" y="330" width="280" height="70" rx="10" fill="#ec4899" opacity="0.9"/>
+  <text x="50" y="354" font-size="11" fill="rgba(255,255,255,0.7)">步骤 5</text>
+  <text x="180" y="356" text-anchor="middle" font-size="14" font-weight="bold" fill="white">预处理 blocks</text>
+  <text x="180" y="378" text-anchor="middle" font-size="11" fill="rgba(255,255,255,0.8)">文件 block 父子关系处理</text>
+  <text x="180" y="392" text-anchor="middle" font-size="10" fill="rgba(255,255,255,0.6)">bt=23 在 bt=33/bt=2 下的特殊逻辑</text>
+
+  <!-- Arrow 5→6 -->
+  <polyline points="320,365 380,365" fill="none" stroke="#94a3b8" stroke-width="2"/>
+  <polygon points="380,365 374,360 374,370" fill="#94a3b8"/>
+
+  <!-- Step 6 -->
+  <rect x="385" y="330" width="280" height="70" rx="10" fill="#0ea5e9" opacity="0.9"/>
+  <text x="395" y="354" font-size="11" fill="rgba(255,255,255,0.7)">步骤 6</text>
+  <text x="525" y="356" text-anchor="middle" font-size="14" font-weight="bold" fill="white">write_blocks_bfs()</text>
+  <text x="525" y="378" text-anchor="middle" font-size="11" fill="rgba(255,255,255,0.8)">BFS 逐层写入 + 容器映射</text>
+  <text x="525" y="392" text-anchor="middle" font-size="10" fill="rgba(255,255,255,0.6)">📁 block_api.py | 批量50+降级单个</text>
+
+  <!-- Arrow 6→7 -->
+  <polyline points="665,365 725,365" fill="none" stroke="#94a3b8" stroke-width="2"/>
+  <polygon points="725,365 719,360 719,370" fill="#94a3b8"/>
+
+  <!-- Step 7 -->
+  <rect x="730" y="330" width="280" height="70" rx="10" fill="#8b5cf6" opacity="0.9"/>
+  <text x="740" y="354" font-size="11" fill="rgba(255,255,255,0.7)">步骤 7</text>
+  <text x="870" y="356" text-anchor="middle" font-size="14" font-weight="bold" fill="white">嵌入表格数据复制</text>
+  <text x="870" y="378" text-anchor="middle" font-size="11" fill="rgba(255,255,255,0.8)">插入 sheet 标签 + 复制数据</text>
+  <text x="870" y="392" text-anchor="middle" font-size="10" fill="rgba(255,255,255,0.6)">📁 post_process.py</text>
+
+  <!-- Arrow down to step 8 -->
+  <polyline points="870,400 870,430 600,430 600,460" fill="none" stroke="#94a3b8" stroke-width="2"/>
+  <polygon points="600,460 595,454 605,454" fill="#94a3b8"/>
+
+  <!-- Step 8 -->
+  <rect x="400" y="465" width="400" height="70" rx="10" fill="#059669" opacity="0.9"/>
+  <text x="410" y="489" font-size="11" fill="rgba(255,255,255,0.7)">步骤 8</text>
+  <text x="600" y="496" text-anchor="middle" font-size="16" font-weight="bold" fill="white">move_to_wiki()</text>
+  <text x="600" y="518" text-anchor="middle" font-size="12" fill="rgba(255,255,255,0.8)">挂入目标知识库 → 返回 (obj_token, node_token)</text>
+
+  <!-- Fallback annotation -->
+  <rect x="40" y="570" width="1120" height="80" rx="10" fill="#fef3c7" stroke="#f59e0b" stroke-width="1.5" stroke-dasharray="6,3"/>
+  <text x="60" y="598" font-size="13" font-weight="bold" fill="#92400e">⚠️ 回退机制</text>
+  <text x="60" y="618" font-size="12" fill="#78350f">步骤 6 写入失败时：删除已创建的空文档 → 自动降级为 Export/Import 路径（_migrate_docx_export_import）</text>
+  <text x="60" y="638" font-size="12" fill="#78350f">整个流程中，media_results 字典贯穿步骤 4→5→6→7，是跨模块通信的唯一载体。</text>
+</svg>

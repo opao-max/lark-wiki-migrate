@@ -1,0 +1,6 @@
+flowchart LR
+    A[media.py] -->|返回| B[MediaResult]
+    B -->|参数传入| C[block_api.py]
+    B -->|参数传入| D[post_process.py]
+    C -->|clean_block| E[占位符/正常写入]
+    D -->|embed_sheets| F[数据复制]

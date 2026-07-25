@@ -1,0 +1,139 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 720">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#f0f4ff"/>
+      <stop offset="100%" stop-color="#e8eeff"/>
+    </linearGradient>
+    <linearGradient id="cli" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#6366f1"/>
+      <stop offset="100%" stop-color="#818cf8"/>
+    </linearGradient>
+    <linearGradient id="dispatch" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#3b82f6"/>
+      <stop offset="100%" stop-color="#60a5fa"/>
+    </linearGradient>
+    <linearGradient id="core" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#10b981"/>
+      <stop offset="100%" stop-color="#34d399"/>
+    </linearGradient>
+    <linearGradient id="infra" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#f59e0b"/>
+      <stop offset="100%" stop-color="#fbbf24"/>
+    </linearGradient>
+    <linearGradient id="post" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#8b5cf6"/>
+      <stop offset="100%" stop-color="#a78bfa"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="720" rx="16" fill="url(#bg)"/>
+
+  <!-- Title -->
+  <text x="600" y="48" text-anchor="middle" font-size="26" font-weight="bold" fill="#1e293b">飞书跨组织知识库迁移 — 系统分层架构</text>
+
+  <!-- Layer 1: CLI 入口层 -->
+  <text x="50" y="105" font-size="16" font-weight="bold" fill="#6366f1" text-anchor="end" transform="translate(60,0)">入口层</text>
+  <rect x="140" y="78" width="1020" height="60" rx="10" fill="url(#cli)" opacity="0.15" stroke="#6366f1" stroke-width="2"/>
+  <rect x="460" y="88" width="280" height="40" rx="8" fill="url(#cli)" opacity="0.9"/>
+  <text x="600" y="114" text-anchor="middle" font-size="15" font-weight="bold" fill="white">wiki-migrate.py (CLI 入口)</text>
+  <text x="600" y="128" text-anchor="middle" font-size="11" fill="rgba(255,255,255,0.8)">信号处理 + 转发子命令</text>
+
+  <!-- Arrow -->
+  <polyline points="600,138 600,158" fill="none" stroke="#94a3b8" stroke-width="2" marker-end="url(#arrowGray)"/>
+
+  <!-- Layer 2: 任务调度层 -->
+  <text x="50" y="195" font-size="16" font-weight="bold" fill="#3b82f6" text-anchor="end" transform="translate(60,0)">调度层</text>
+  <rect x="140" y="168" width="1020" height="60" rx="10" fill="url(#dispatch)" opacity="0.15" stroke="#3b82f6" stroke-width="2"/>
+  <rect x="220" y="178" width="180" height="40" rx="8" fill="url(#dispatch)" opacity="0.9"/>
+  <text x="310" y="202" text-anchor="middle" font-size="13" font-weight="bold" fill="white">wiki_commands.py</text>
+  <rect x="430" y="178" width="100" height="40" rx="8" fill="url(#dispatch)" opacity="0.7"/>
+  <text x="480" y="202" text-anchor="middle" font-size="12" fill="white">scan</text>
+  <rect x="545" y="178" width="100" height="40" rx="8" fill="url(#dispatch)" opacity="0.7"/>
+  <text x="595" y="202" text-anchor="middle" font-size="12" fill="white">run</text>
+  <rect x="660" y="178" width="100" height="40" rx="8" fill="url(#dispatch)" opacity="0.7"/>
+  <text x="710" y="202" text-anchor="middle" font-size="12" fill="white">verify</text>
+  <rect x="775" y="178" width="130" height="40" rx="8" fill="url(#dispatch)" opacity="0.7"/>
+  <text x="840" y="202" text-anchor="middle" font-size="12" fill="white">migrate-one</text>
+
+  <!-- Arrow -->
+  <polyline points="600,228 600,258" fill="none" stroke="#94a3b8" stroke-width="2"/>
+
+  <!-- Layer 3: 迁移策略层 -->
+  <text x="50" y="295" font-size="16" font-weight="bold" fill="#10b981" text-anchor="end" transform="translate(60,0)">策略层</text>
+  <rect x="140" y="268" width="1020" height="80" rx="10" fill="url(#core)" opacity="0.12" stroke="#10b981" stroke-width="2"/>
+  <rect x="170" y="280" width="140" height="55" rx="8" fill="url(#core)" opacity="0.85"/>
+  <text x="240" y="304" text-anchor="middle" font-size="13" font-weight="bold" fill="white">migrate_docx</text>
+  <text x="240" y="322" text-anchor="middle" font-size="10" fill="rgba(255,255,255,0.8)">Block API 高保真</text>
+  <rect x="325" y="280" width="140" height="55" rx="8" fill="url(#core)" opacity="0.7"/>
+  <text x="395" y="304" text-anchor="middle" font-size="13" fill="white">export_import</text>
+  <text x="395" y="322" text-anchor="middle" font-size="10" fill="rgba(255,255,255,0.8)">doc/sheet/bitable</text>
+  <rect x="480" y="280" width="120" height="55" rx="8" fill="url(#core)" opacity="0.7"/>
+  <text x="540" y="304" text-anchor="middle" font-size="13" fill="white">migrate_file</text>
+  <text x="540" y="322" text-anchor="middle" font-size="10" fill="rgba(255,255,255,0.8)">下载→上传</text>
+  <rect x="615" y="280" width="130" height="55" rx="8" fill="url(#core)" opacity="0.7"/>
+  <text x="680" y="304" text-anchor="middle" font-size="13" fill="white">placeholder</text>
+  <text x="680" y="322" text-anchor="middle" font-size="10" fill="rgba(255,255,255,0.8)">mindnote/slides</text>
+  <rect x="760" y="280" width="120" height="55" rx="8" fill="url(#core)" opacity="0.7"/>
+  <text x="820" y="304" text-anchor="middle" font-size="13" fill="white">shortcut</text>
+  <text x="820" y="322" text-anchor="middle" font-size="10" fill="rgba(255,255,255,0.8)">快捷方式</text>
+  <!-- strategies.py label -->
+  <text x="1040" y="315" text-anchor="middle" font-size="11" fill="#10b981" font-style="italic">strategies.py</text>
+
+  <!-- Arrow -->
+  <polyline points="600,348 600,378" fill="none" stroke="#94a3b8" stroke-width="2"/>
+
+  <!-- Layer 4: 核心处理层 (3 modules side by side) -->
+  <text x="50" y="415" font-size="16" font-weight="bold" fill="#0ea5e9" text-anchor="end" transform="translate(60,0)">处理层</text>
+  <rect x="140" y="388" width="1020" height="80" rx="10" fill="#e0f2fe" stroke="#0ea5e9" stroke-width="2"/>
+
+  <rect x="170" y="400" width="300" height="55" rx="8" fill="#0ea5e9" opacity="0.85"/>
+  <text x="320" y="424" text-anchor="middle" font-size="14" font-weight="bold" fill="white">media.py</text>
+  <text x="320" y="442" text-anchor="middle" font-size="11" fill="rgba(255,255,255,0.8)">图片/文件/表格/画板 下载→上传</text>
+
+  <rect x="490" y="400" width="300" height="55" rx="8" fill="#0284c7" opacity="0.85"/>
+  <text x="640" y="424" text-anchor="middle" font-size="14" font-weight="bold" fill="white">block_api.py</text>
+  <text x="640" y="442" text-anchor="middle" font-size="11" fill="rgba(255,255,255,0.8)">Block 读取 / 清洗 / BFS 写入</text>
+
+  <rect x="810" y="400" width="300" height="55" rx="8" fill="#0369a1" opacity="0.85"/>
+  <text x="960" y="424" text-anchor="middle" font-size="14" font-weight="bold" fill="white">post_process.py</text>
+  <text x="960" y="442" text-anchor="middle" font-size="11" fill="rgba(255,255,255,0.8)">嵌入表格数据复制 / 占位符统一</text>
+
+  <!-- Data flow arrow: media → block_api -->
+  <path d="M 470 427 L 490 427" fill="none" stroke="#fbbf24" stroke-width="3" marker-end="url(#arrowYellow)"/>
+  <text x="480" y="418" text-anchor="middle" font-size="9" fill="#f59e0b" font-weight="bold">MediaResult</text>
+
+  <!-- Arrow -->
+  <polyline points="600,468 600,498" fill="none" stroke="#94a3b8" stroke-width="2"/>
+
+  <!-- Layer 5: 公共基础设施 -->
+  <text x="50" y="530" font-size="16" font-weight="bold" fill="#f59e0b" text-anchor="end" transform="translate(60,0)">基础层</text>
+  <rect x="140" y="508" width="1020" height="60" rx="10" fill="url(#infra)" opacity="0.12" stroke="#f59e0b" stroke-width="2"/>
+  <rect x="220" y="518" width="160" height="40" rx="8" fill="url(#infra)" opacity="0.85"/>
+  <text x="300" y="542" text-anchor="middle" font-size="13" font-weight="bold" fill="white">log()</text>
+  <rect x="400" y="518" width="160" height="40" rx="8" fill="url(#infra)" opacity="0.7"/>
+  <text x="480" y="542" text-anchor="middle" font-size="13" fill="white">lark_api()</text>
+  <rect x="580" y="518" width="160" height="40" rx="8" fill="url(#infra)" opacity="0.7"/>
+  <text x="660" y="542" text-anchor="middle" font-size="13" fill="white">run_lark()</text>
+  <rect x="760" y="518" width="180" height="40" rx="8" fill="url(#infra)" opacity="0.7"/>
+  <text x="850" y="542" text-anchor="middle" font-size="13" fill="white">state 原子读写</text>
+  <text x="1040" y="542" text-anchor="middle" font-size="11" fill="#f59e0b" font-style="italic">common.py</text>
+
+  <!-- Arrow -->
+  <polyline points="600,568 600,598" fill="none" stroke="#94a3b8" stroke-width="2"/>
+
+  <!-- Layer 6: 后处理脚本 -->
+  <text x="50" y="638" font-size="16" font-weight="bold" fill="#8b5cf6" text-anchor="end" transform="translate(60,0)">后处理</text>
+  <rect x="140" y="608" width="1020" height="60" rx="10" fill="url(#post)" opacity="0.12" stroke="#8b5cf6" stroke-width="2"/>
+  <rect x="180" y="618" width="180" height="40" rx="8" fill="url(#post)" opacity="0.8"/>
+  <text x="270" y="642" text-anchor="middle" font-size="13" font-weight="bold" fill="white">fix-links.py</text>
+  <rect x="380" y="618" width="190" height="40" rx="8" fill="url(#post)" opacity="0.7"/>
+  <text x="475" y="642" text-anchor="middle" font-size="13" fill="white">fix-mentions.py</text>
+  <rect x="590" y="618" width="220" height="40" rx="8" fill="url(#post)" opacity="0.7"/>
+  <text x="700" y="642" text-anchor="middle" font-size="13" fill="white">migrate-comments.py</text>
+  <rect x="830" y="618" width="210" height="40" rx="8" fill="url(#post)" opacity="0.7"/>
+  <text x="935" y="642" text-anchor="middle" font-size="13" fill="white">mindnote-export.py</text>
+
+  <!-- Legend -->
+  <text x="600" y="700" text-anchor="middle" font-size="12" fill="#64748b">上层依赖下层，数据流自上而下。黄色箭头标注 MediaResult 数据流方向。</text>
+</svg>

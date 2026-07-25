@@ -1,0 +1,103 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 620">
+  <rect width="1100" height="620" rx="12" fill="#f8fafc"/>
+  <text x="550" y="38" text-anchor="middle" font-size="22" font-weight="bold" fill="#1e293b">BFS 逐层写入流程 — write_blocks_bfs()</text>
+
+  <!-- Source tree -->
+  <rect x="30" y="60" width="280" height="280" rx="10" fill="#eff6ff" stroke="#3b82f6" stroke-width="1.5"/>
+  <text x="170" y="85" text-anchor="middle" font-size="14" font-weight="bold" fill="#1e40af">源文档 Block 树</text>
+
+  <!-- Source tree nodes -->
+  <rect x="120" y="100" width="100" height="30" rx="6" fill="#3b82f6"/>
+  <text x="170" y="120" text-anchor="middle" font-size="11" fill="white">Page (根)</text>
+  <line x1="140" y1="130" x2="90" y2="155" stroke="#93c5fd" stroke-width="1.5"/>
+  <line x1="170" y1="130" x2="170" y2="155" stroke="#93c5fd" stroke-width="1.5"/>
+  <line x1="200" y1="130" x2="250" y2="155" stroke="#93c5fd" stroke-width="1.5"/>
+  <rect x="50" y="155" width="80" height="28" rx="5" fill="#60a5fa"/>
+  <text x="90" y="174" text-anchor="middle" font-size="10" fill="white">标题 H1</text>
+  <rect x="140" y="155" width="60" height="28" rx="5" fill="#60a5fa"/>
+  <text x="170" y="174" text-anchor="middle" font-size="10" fill="white">文本</text>
+  <rect x="215" y="155" width="70" height="28" rx="5" fill="#60a5fa"/>
+  <text x="250" y="174" text-anchor="middle" font-size="10" fill="white">表格</text>
+  <line x1="230" y1="183" x2="220" y2="208" stroke="#93c5fd" stroke-width="1.5"/>
+  <line x1="260" y1="183" x2="270" y2="208" stroke="#93c5fd" stroke-width="1.5"/>
+  <rect x="190" y="208" width="55" height="25" rx="4" fill="#93c5fd"/>
+  <text x="218" y="225" text-anchor="middle" font-size="9" fill="white">cell 1</text>
+  <rect x="253" y="208" width="55" height="25" rx="4" fill="#93c5fd"/>
+  <text x="280" y="225" text-anchor="middle" font-size="9" fill="white">cell 2</text>
+
+  <!-- Layer labels -->
+  <text x="45" y="120" font-size="10" fill="#3b82f6" font-weight="bold">第 0 层</text>
+  <text x="45" y="172" font-size="10" fill="#3b82f6" font-weight="bold">第 1 层</text>
+  <text x="45" y="225" font-size="10" fill="#3b82f6" font-weight="bold">第 2 层</text>
+
+  <!-- BFS Queue visualization -->
+  <text x="550" y="85" text-anchor="middle" font-size="14" font-weight="bold" fill="#1e293b">BFS 队列处理顺序</text>
+
+  <!-- Queue box 1 -->
+  <rect x="370" y="100" width="360" height="50" rx="8" fill="#dbeafe" stroke="#3b82f6" stroke-width="1"/>
+  <text x="380" y="120" font-size="11" fill="#1e40af" font-weight="bold">Queue = [Page]</text>
+  <text x="380" y="136" font-size="10" fill="#3b82f6">写入第 1 层的 3 个 block → 获得目标 ID</text>
+  <polyline points="550,150 550,165" fill="none" stroke="#94a3b8" stroke-width="1.5"/>
+  <polygon points="550,165 547,160 553,160" fill="#94a3b8"/>
+
+  <!-- Queue box 2 -->
+  <rect x="370" y="170" width="360" height="50" rx="8" fill="#dbeafe" stroke="#3b82f6" stroke-width="1"/>
+  <text x="380" y="190" font-size="11" fill="#1e40af" font-weight="bold">Queue = [标题, 文本, 表格]</text>
+  <text x="380" y="206" font-size="10" fill="#3b82f6">表格自动创建 cells → 读回 ID → 建立映射</text>
+  <polyline points="550,220 550,235" fill="none" stroke="#94a3b8" stroke-width="1.5"/>
+  <polygon points="550,235 547,230 553,230" fill="#94a3b8"/>
+
+  <!-- Queue box 3 -->
+  <rect x="370" y="240" width="360" height="50" rx="8" fill="#dbeafe" stroke="#3b82f6" stroke-width="1"/>
+  <text x="380" y="260" font-size="11" fill="#1e40af" font-weight="bold">Queue = [cell1, cell2]</text>
+  <text x="380" y="276" font-size="10" fill="#3b82f6">写入 cell 内容（已由映射知道目标 parent ID）</text>
+
+  <!-- id_map -->
+  <rect x="770" y="100" width="300" height="200" rx="10" fill="#fef3c7" stroke="#f59e0b" stroke-width="1.5"/>
+  <text x="920" y="125" text-anchor="middle" font-size="13" font-weight="bold" fill="#92400e">id_map (源→目标)</text>
+  <text x="790" y="150" font-size="11" fill="#78350f" font-family="monospace">src_page → tgt_doc_id</text>
+  <text x="790" y="172" font-size="11" fill="#78350f" font-family="monospace">src_h1   → tgt_block_1</text>
+  <text x="790" y="194" font-size="11" fill="#78350f" font-family="monospace">src_text → tgt_block_2</text>
+  <text x="790" y="216" font-size="11" fill="#78350f" font-family="monospace">src_tbl  → tgt_block_3</text>
+  <text x="790" y="238" font-size="11" fill="#78350f" font-family="monospace">src_cell1→ tgt_auto_cell1</text>
+  <text x="790" y="260" font-size="11" fill="#78350f" font-family="monospace">src_cell2→ tgt_auto_cell2</text>
+
+  <!-- Batch + Fallback -->
+  <rect x="30" y="360" width="520" height="100" rx="10" fill="#ecfdf5" stroke="#10b981" stroke-width="1.5"/>
+  <text x="50" y="385" font-size="13" font-weight="bold" fill="#065f46">批量写入（每批 ≤ 50）</text>
+  <text x="50" y="408" font-size="11" fill="#047857">1. 对当前层的所有 block 调用 clean_block(block, media_results)</text>
+  <text x="50" y="428" font-size="11" fill="#047857">2. POST /blocks/{parent}/children 批量写入</text>
+  <text x="50" y="448" font-size="11" fill="#047857">3. 从响应中提取新 block_id → 更新 id_map</text>
+
+  <polyline points="550,410 590,410" fill="none" stroke="#ef4444" stroke-width="2" stroke-dasharray="4,3"/>
+  <text x="570" y="400" font-size="10" fill="#ef4444" font-weight="bold">失败</text>
+
+  <rect x="595" y="360" width="470" height="100" rx="10" fill="#fef2f2" stroke="#ef4444" stroke-width="1.5"/>
+  <text x="615" y="385" font-size="13" font-weight="bold" fill="#991b1b">降级：逐个写入</text>
+  <text x="615" y="408" font-size="11" fill="#b91c1c">1. 逐个 block 重试</text>
+  <text x="615" y="428" font-size="11" fill="#b91c1c">2. 打印 CULPRIT 定位问题 block</text>
+  <text x="615" y="448" font-size="11" fill="#b91c1c">3. 跳过失败的 block，继续写入其余</text>
+
+  <!-- Container special handling -->
+  <rect x="30" y="480" width="1035" height="120" rx="10" fill="#faf5ff" stroke="#8b5cf6" stroke-width="1.5"/>
+  <text x="50" y="505" font-size="13" font-weight="bold" fill="#5b21b6">容器 block 特殊处理 — _map_container_children()</text>
+  <rect x="50" y="520" width="220" height="65" rx="8" fill="#8b5cf6" opacity="0.15"/>
+  <text x="160" y="540" text-anchor="middle" font-size="12" font-weight="bold" fill="#5b21b6">table (31) / grid (24/25)</text>
+  <text x="160" y="558" text-anchor="middle" font-size="10" fill="#7c3aed">飞书自动创建子 block</text>
+  <text x="160" y="573" text-anchor="middle" font-size="10" fill="#7c3aed">→ 读回子 ID → 建立映射</text>
+
+  <rect x="290" y="520" width="220" height="65" rx="8" fill="#8b5cf6" opacity="0.15"/>
+  <text x="400" y="540" text-anchor="middle" font-size="12" font-weight="bold" fill="#5b21b6">quote_container (34)</text>
+  <text x="400" y="558" text-anchor="middle" font-size="10" fill="#7c3aed">飞书自动创建子 block</text>
+  <text x="400" y="573" text-anchor="middle" font-size="10" fill="#7c3aed">→ 读回子 ID → 建立映射</text>
+
+  <rect x="530" y="520" width="250" height="65" rx="8" fill="#ef4444" opacity="0.1"/>
+  <text x="655" y="540" text-anchor="middle" font-size="12" font-weight="bold" fill="#991b1b">callout (19) ⚠️</text>
+  <text x="655" y="558" text-anchor="middle" font-size="10" fill="#b91c1c">飞书自动创建空子 block</text>
+  <text x="655" y="573" text-anchor="middle" font-size="10" fill="#b91c1c">→ 先删除 → BFS 重新写入内容</text>
+
+  <rect x="800" y="520" width="250" height="65" rx="8" fill="#10b981" opacity="0.1"/>
+  <text x="925" y="545" text-anchor="middle" font-size="12" font-weight="bold" fill="#065f46">已自动映射的 block</text>
+  <text x="925" y="565" text-anchor="middle" font-size="10" fill="#047857">跳过写入，直接加入</text>
+  <text x="925" y="580" text-anchor="middle" font-size="10" fill="#047857">下一层 BFS 队列</text>
+</svg>

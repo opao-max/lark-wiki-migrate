@@ -1,0 +1,31 @@
+mindmap
+  root((模块依赖))
+    common.py
+      日志 log
+      异常类
+      lark_api / run_lark
+      state 原子读写
+    media.py
+      依赖 common
+      process_images
+      process_embedded_files
+      process_embedded_sheets
+      process_boards
+      返回 MediaResult
+    block_api.py
+      依赖 common
+      read_docx_blocks
+      clean_block
+        接收 MediaResult
+      write_blocks_bfs
+    post_process.py
+      依赖 common + block_api
+      embed_sheets 数据复制
+      fix_placeholders 占位符统一
+    strategies.py
+      依赖所有模块
+      migrate_docx
+      migrate_export_import
+      migrate_file
+      migrate_placeholder
+      migrate_shortcut

@@ -1,0 +1,13 @@
+flowchart TD
+    A([开始]) --> B[导出 .docx]
+    B --> C[导入目标]
+    C --> D{有嵌入表格?}
+    D -->|是| E[export sheet]
+    E --> F[insert + 复制数据]
+    F --> G[占位符统一]
+    D -->|否| G
+    G --> H{有嵌入文件?}
+    H -->|是| I[下载上传文件]
+    I --> J[move_to_wiki]
+    H -->|否| J
+    J --> K([完成])
