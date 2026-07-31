@@ -413,3 +413,9 @@ python3 scan-embeds.py --profile seewo --space <源空间ID> --workers 8
     ├── node_<token>/               ← export/import 临时文件（用完自动清理）
     └── dl_<token>                  ← file 下载临时文件（用完自动清理）
 ```
+
+## Migration Notes
+
+- The tool keeps per-wiki migration state in migration-state*.json; reruns resume from the saved offset instead of restarting.
+- Temporary export/import artifacts under .workdir/ are cleaned up automatically; force-clean with python -m lark_wiki_migrate --reset if a run is interrupted.
+
