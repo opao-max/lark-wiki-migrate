@@ -1,0 +1,19 @@
+Update a Lark document
+
+Usage:
+  lark-cli docs +update [flags]
+
+Flags:
+      --as string                        identity type: user | bot (default "user")
+      --doc string                       document URL or token
+      --dry-run                          print request without executing
+  -h, --help                             help for +update
+  -q, --jq string                        jq expression to filter JSON output
+      --markdown string                  new content (Lark-flavored Markdown; create blank whiteboards with <whiteboard type="blank"></whiteboard>, repeat to create multiple boards) (supports @file, - for stdin)
+      --mode string                      update mode: append | overwrite | replace_range | replace_all | insert_before | insert_after | delete_range
+      --new-title string                 also update document title
+      --selection-by-title string        title locator (e.g. '## Section')
+      --selection-with-ellipsis string   content locator (e.g. 'start...end')
+
+Global Flags:
+      --profile string   use a specific profile

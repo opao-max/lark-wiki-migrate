@@ -1,0 +1,18 @@
+Insert a local image or file at the end of a Lark document (4-step orchestration + auto-rollback)
+
+Usage:
+  lark-cli docs +media-insert [flags]
+
+Flags:
+      --align string     alignment: left | center | right
+      --as string        identity type: user | bot (default "user")
+      --caption string   image caption text
+      --doc string       document URL or document_id
+      --dry-run          print request without executing
+      --file string      local file path (files > 20MB use multipart upload automatically)
+  -h, --help             help for +media-insert
+  -q, --jq string        jq expression to filter JSON output
+      --type string      type: image | file (default "image")
+
+Global Flags:
+      --profile string   use a specific profile

@@ -1,0 +1,17 @@
+Download document media or whiteboard thumbnail (auto-detects extension)
+
+Usage:
+  lark-cli docs +media-download [flags]
+
+Flags:
+      --as string       identity type: user | bot (default "user")
+      --dry-run         print request without executing
+  -h, --help            help for +media-download
+  -q, --jq string       jq expression to filter JSON output
+      --output string   local save path
+      --overwrite       overwrite existing output file
+      --token string    resource token (file_token or whiteboard_id)
+      --type string     resource type: media (default) | whiteboard (default "media")
+
+Global Flags:
+      --profile string   use a specific profile
