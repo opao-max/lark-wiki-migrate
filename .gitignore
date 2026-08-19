@@ -7,3 +7,9 @@ __pycache__/
 *.log
 .idea/
 .vscode/
+
+# Env & IDE
+.env
+.idea/
+.vscode/
+
